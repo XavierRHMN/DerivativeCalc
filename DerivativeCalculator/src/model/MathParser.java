@@ -94,6 +94,7 @@ public class MathParser {
     }
 
 
+
     private void processOperator(Stack<Token> operatorStack, Stack<MathNode> output) {
         Token operator = operatorStack.pop();
         MathNode rightOperand = output.pop();
@@ -101,6 +102,7 @@ public class MathParser {
         output.push(new MathNode(operator.value, leftOperand, rightOperand));
     }
 
+    // gets the precedence of current operator
     private int getPrecedence(String operator) {
         switch (operator) {
             case "+":
