@@ -39,8 +39,6 @@ public class MathNode {
                     return new MathNode("*",
                             right,
                             new MathNode("^", left, new MathNode(String.valueOf(Integer.parseInt(right.value) - 1))));
-                } else {
-                    throw new UnsupportedOperationException();
                 }
             case "x":
                 return new MathNode("1");
