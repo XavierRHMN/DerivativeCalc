@@ -1,8 +1,12 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import model.MathNode;
 import model.MathParser;
+
+import java.awt.*;
 
 public class DerivativeCalculatorApp extends JFrame {
     private JTextField inputField;
@@ -23,19 +27,29 @@ public class DerivativeCalculatorApp extends JFrame {
 
     private void initButton() {
         calculateButton = new JButton("Calculate Derivative");
+        calculateButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+        calculateButton.setBackground(new Color(50, 150, 200));
+        calculateButton.setForeground(Color.WHITE);
     }
 
     private void initField() {
         inputField = new JTextField(20);
         inputField.setText("0");
+        inputField.setFont(new Font("SansSerif", Font.BOLD, 16));
     }
 
     private void layoutComponents() {
-        JPanel panel = new JPanel();
-        panel.add(inputField);
-        panel.add(calculateButton);
-        panel.add(new JScrollPane(displayArea));
-        this.add(panel);
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(1, 2, 10, 10)); // 1 row, 2 cols, 10px gaps
+        inputPanel.setBorder(new EmptyBorder(10, 10, 10, 10)); // 10px padding around the panel
+        inputPanel.add(inputField);
+        inputPanel.add(calculateButton);
+
+        setLayout(new BorderLayout(10, 10)); // 10px horizontal and vertical gaps
+        add(inputPanel, BorderLayout.NORTH);
+
+        add(new JScrollPane(displayArea), BorderLayout.CENTER);
+
     }
 
     private void addActionListeners() {
@@ -45,6 +59,7 @@ public class DerivativeCalculatorApp extends JFrame {
             String userInput = inputField.getText();
             MathNode expression = parser.parseExpression(userInput);
             MathNode derivative = expression.differentiate();
+            displayArea.setFont(new Font("SansSerif", Font.BOLD, 15));
             displayArea.setText(derivative.simplify().toString());
         });
     }
