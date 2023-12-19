@@ -1,7 +1,11 @@
 package model;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class MathNode {
     String value;
+    MathNode argument;
     MathNode left;
     MathNode right;
 
@@ -15,6 +19,11 @@ public class MathNode {
         this.value = value;
         this.left = left;
         this.right = right;
+    }
+
+    private boolean isFunction() {
+        // Check if the value represents a function
+        return Arrays.asList("sin", "cos", "exp").contains(value);
     }
 
     // Differentiates the node
@@ -55,6 +64,7 @@ public class MathNode {
             return false;
         }
     }
+
 
     // Converts the node back to string for display
     @Override

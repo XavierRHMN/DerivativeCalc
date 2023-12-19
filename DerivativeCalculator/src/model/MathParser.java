@@ -113,6 +113,8 @@ public class MathParser {
                 return 2;
             case "^":
                 return 3;
+            case "(":
+                return 10;
             default:
                 throw new IllegalArgumentException("Unknown operator: " + operator);
         }
