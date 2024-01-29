@@ -18,7 +18,7 @@ public class MathParser {
             this.type = type;
         }
     }
-
+    
     // Tokenize the expression
     private List<Token> tokenize(String expression) {
         List<Token> tokens = new ArrayList<>();
@@ -27,7 +27,11 @@ public class MathParser {
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             if (Character.isWhitespace(c)) continue;
-
+            
+            if (c == 'x' && i > 0 && Character.isDigit(chars[i - 1])) {
+                tokens.add(new Token("*", TokenType.OPERATOR));
+            }
+            
             if (Character.isDigit(c)) {
                 StringBuilder number = new StringBuilder();
                 while (i < chars.length && Character.isDigit(chars[i])) {
